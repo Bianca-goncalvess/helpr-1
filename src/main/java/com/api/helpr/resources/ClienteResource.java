@@ -1,5 +1,8 @@
 package com.api.helpr.resources;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +29,15 @@ public class ClienteResource {
 		Cliente obj = service.findById(id);
 		// retornando para o front atráves do dto como metodo de segurança
 	return ResponseEntity.ok().body(new ClienteDTO(obj));
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<ClienteDTO>> findAllClientes(){
+		List<Cliente> list = service.findAllClientes();
+		List<ClienteDTO> listDto = list.stream()
+				.map(cliente -> new ClienteDTO(cliente))
+				.collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDto);
 	}
 
 }

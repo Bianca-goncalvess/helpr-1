@@ -1,5 +1,6 @@
 package com.api.helpr.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,10 @@ import com.api.helpr.domain.Cliente;
 import com.api.helpr.repositories.ClienteRepository;
 import com.api.helpr.repositories.PessoaRepository;
 import com.api.helpr.services.exceptions.ObjectNotFoundException;
+
+
+
+
 
 @Service
 public class ClienteService {
@@ -25,5 +30,8 @@ public class ClienteService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Esse Objeto não foi encontrado" + id));
 	}
 	
-	
+	// Busca para todos os registros de clientes
+	public List<Cliente> findAllClientes(){
+		return repository.findAll();
+	}
 }
